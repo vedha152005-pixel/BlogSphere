@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>View Posts - BlogSphere</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">BlogSphere</div>
+
+    <nav class="nav-links">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('create_post') }}">Create Post</a>
+        <a href="{{ url_for('view_posts') }}">View Posts</a>
+        <a href="{{ url_for('my_posts') }}">My Posts</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+
+</header>
+
+
+<main class="view-posts-page">
+
+    <section class="view-posts-heading">
+
+        <p class="view-posts-tagline">LATEST STORIES</p>
+
+        <h1>Discover Posts</h1>
+
+        <p>
+            Read stories, share your thoughts, and connect with the BlogSphere community.
+        </p>
+
+    </section>
+
+
+    <section class="view-posts-list">
+
+        {% if posts %}
+
+            {% for post in posts %}
+
+            <article class="view-post-card">
+
+                <!-- POST HEADER -->
+
+                <div class="view-post-header">
+
+                    <h2>{{ post.title }}</h2>
+
+                    <p>
+                        By <strong>{{ post.name }}</strong>
+                    </p>
+
+                </div>
+
+
+                <!-- STORY -->
+
+                <div class="view-post-story">
+
+                    <p>{{ post.content }}</p>
+
+                </div>
+
+
+                <!-- IMAGE -->
+
+                {% if post.image %}
+
+                <div class="view-post-image">
+
+                    <img
+                        src="{{ url_for('static', filename='uploads/' + post.image) }}"
+                        alt="Post image"
+                    >
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- REACTIONS -->
+
+                <div class="view-reactions">
+
+                    <p class="reaction-heading">
+                        REACTIONS
+                    </p>
+
+                    <div class="reaction-buttons">
+
+
+                        <!-- LIKE -->
+
+                        <form
+                            method="POST"
+                            action="{{ url_for('react_to_post', post_id=post.id) }}"
+                        >
+
+                            <input
+                                type="hidden"
+                                name="reaction_type"
+                                value="like"
+                            >
+
+                            <button
+                                type="submit"
+                                class="reaction-button like-button"
+                            >
+                                <span class="reaction-icon">👍</span>
+                                <span class="reaction-label">Like</span>
+                                <strong>{{ post.like_count or 0 }}</strong>
+                            </button>
+
+                        </form>
+
+
+                        <!-- DISLIKE -->
+
+                        <form
+                            method="POST"
+                            action="{{ url_for('react_to_post', post_id=post.id) }}"
+                        >
+
+                            <input
+                                type="hidden"
+                                name="reaction_type"
+                                value="dislike"
+                            >
+
+                            <button
+                                type="submit"
+                                class="reaction-button dislike-button"
+                            >
+                                <span class="reaction-icon">👎</span>
+                                <span class="reaction-label">Dislike</span>
+                                <strong>{{ post.dislike_count or 0 }}</strong>
+                            </button>
+
+                        </form>
+
+
+                        <!-- CHEER UP -->
+
+                        <form
+                            method="POST"
+                            action="{{ url_for('react_to_post', post_id=post.id) }}"
+                        >
+
+                            <input
+                                type="hidden"
+                                name="reaction_type"
+                                value="cheer"
+                            >
+
+                            <button
+                                type="submit"
+                                class="reaction-button cheer-button"
+                            >
+                                <span class="reaction-icon">🎉</span>
+                                <span class="reaction-label">Cheer Up</span>
+                                <strong>{{ post.cheer_count or 0 }}</strong>
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+                <!-- COMMENTS -->
+
+                <div class="view-comments">
+
+                    <p class="comments-title">
+                        JOIN THE CONVERSATION
+                    </p>
+
+                    <h3>Comments</h3>
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('add_comment', post_id=post.id) }}"
+                        class="view-comment-form"
+                    >
+
+                        <textarea
+                            name="comment_text"
+                            placeholder="Write your comment..."
+                            required
+                        ></textarea>
+
+                        <button
+                            type="submit"
+                            class="comment-button"
+                        >
+                            Add Comment
+                        </button>
+
+                    </form>
+
+
+                    {% if post.comments %}
+
+                    <div class="view-comments-list">
+
+                        {% for comment in post.comments %}
+
+                        <div class="view-comment-card">
+
+                            <div class="comment-user">
+
+                                <strong>
+                                    {{ comment.name }}
+                                </strong>
+
+                                <span>
+                                    {{ comment.created_at }}
+                                </span>
+
+                            </div>
+
+                            <p>
+                                {{ comment.comment_text }}
+                            </p>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    {% else %}
+
+                    <div class="no-view-comments">
+                        No comments yet. Be the first to share your thoughts.
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="view-post-date">
+                    {{ post.created_at }}
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-posts">
+
+                <h2>No posts yet</h2>
+
+                <p>
+                    Be the first person to share a story.
+                </p>
+
+                <a
+                    href="{{ url_for('create_post') }}"
+                    class="primary-button"
+                >
+                    Create Your First Post
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+
+<footer class="footer">
+    © 2026 BlogSphere. Share your thoughts.
+</footer>
+
+</body>
+</html>

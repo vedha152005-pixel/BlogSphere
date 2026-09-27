@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Post - BlogSphere</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+
+        <div class="logo">
+            BlogSphere
+        </div>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/create-post">Create Post</a>
+            <a href="/my-posts">My Posts</a>
+            <a href="/logout">Logout</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Edit Post Section -->
+    <main class="post-container">
+
+        <div class="post-card">
+
+            <p class="post-tagline">
+                UPDATE YOUR STORY
+            </p>
+
+            <h1>Edit Post</h1>
+
+            <p class="post-description">
+                Make changes to your story and keep your post up to date.
+            </p>
+
+
+            <form method="POST">
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Post Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        value="{{ post.title }}"
+                        maxlength="200"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="content">
+                        Your Story
+                    </label>
+
+                    <textarea
+                        id="content"
+                        name="content"
+                        rows="9"
+                        required
+                    >{{ post.content }}</textarea>
+
+                </div>
+
+
+                <button type="submit" class="auth-btn">
+                    Update Post
+                </button>
+
+            </form>
+
+
+            <p class="auth-footer">
+
+                <a href="/my-posts">
+                    ← Back to My Posts
+                </a>
+
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+        <p>© 2026 BlogSphere. Share your thoughts.</p>
+    </footer>
+
+</body>
+
+</html>

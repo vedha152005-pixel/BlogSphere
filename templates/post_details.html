@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ post.title }} - BlogSphere</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            BlogSphere
+        </div>
+
+        <nav>
+
+            <a href="/">Home</a>
+
+            {% if session.get("user_id") %}
+
+                <a href="/create-post">
+                    Create Post
+                </a>
+
+                <a href="/my-posts">
+                    My Posts
+                </a>
+
+                <a href="/logout">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="/login">
+                    Login
+                </a>
+
+                <a href="/register">
+                    Register
+                </a>
+
+            {% endif %}
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================
+         POST DETAILS
+    ========================== -->
+
+    <main class="post-details-container">
+
+
+        <article class="post-details-card">
+
+
+            {% if post.image %}
+
+                <img
+                    src="{{ url_for('static', filename='uploads/' + post.image) }}"
+                    alt="Post image"
+                    class="post-details-image"
+                >
+
+            {% endif %}
+
+
+
+            <div class="post-details-content">
+
+
+                <p class="tagline">
+                    BLOGSPHERE STORY
+                </p>
+
+
+                <h1>
+                    {{ post.title }}
+                </h1>
+
+
+                <p class="post-author">
+                    By {{ post.name }}
+                </p>
+
+
+                <p class="post-details-text">{{ post.content }}</p>
+
+
+                <p class="post-date">
+                    {{ post.created_at }}
+                </p>
+
+
+            </div>
+
+
+        </article>
+
+
+
+        <!-- =========================
+             COMMENTS SECTION
+        ========================== -->
+
+        <section class="comments-section">
+
+
+            <div class="comments-heading">
+
+                <p class="tagline">
+                    JOIN THE CONVERSATION
+                </p>
+
+                <h2>
+                    Comments
+                </h2>
+
+            </div>
+
+
+
+            <!-- ADD COMMENT FORM -->
+
+            <form
+                method="POST"
+                action="/post/{{ post.id }}/comment"
+                class="comment-form"
+            >
+
+
+                <div class="form-group">
+
+
+                    <label for="comment_text">
+                        Share your thoughts
+                    </label>
+
+
+                    <textarea
+                        id="comment_text"
+                        name="comment_text"
+                        rows="4"
+                        placeholder="Write a comment..."
+                        required
+                    ></textarea>
+
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="auth-btn"
+                >
+                    Add Comment
+                </button>
+
+
+            </form>
+
+
+
+            <!-- EXISTING COMMENTS -->
+
+            {% if comments %}
+
+
+                <div class="comments-list">
+
+
+                    {% for comment in comments %}
+
+
+                        <div class="comment-card">
+
+
+                            <div class="comment-header">
+
+
+                                <strong>
+                                    {{ comment.name }}
+                                </strong>
+
+
+                                <span>
+                                    {{ comment.created_at }}
+                                </span>
+
+
+                            </div>
+
+
+                            <p>
+                                {{ comment.comment_text }}
+                            </p>
+
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="no-comments">
+
+
+                    <h3>
+                        No comments yet
+                    </h3>
+
+
+                    <p>
+                        Be the first person to share your thoughts.
+                    </p>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 BlogSphere. Share your thoughts.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
+

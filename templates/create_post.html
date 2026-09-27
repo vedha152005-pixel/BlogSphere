@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Post - BlogSphere</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            BlogSphere
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="{{ url_for('home') }}">
+                Home
+            </a>
+
+            <a href="{{ url_for('create_post') }}">
+                Create Post
+            </a>
+
+            <a href="{{ url_for('view_posts') }}">
+                View Posts
+            </a>
+
+            <a href="{{ url_for('my_posts') }}">
+                My Posts
+            </a>
+
+            <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         CREATE POST
+    ========================== -->
+
+    <main class="create-page">
+
+        <div class="create-card">
+
+            <div class="create-heading">
+
+                <p class="create-tagline">
+                    SHARE YOUR THOUGHTS
+                </p>
+
+                <h1>
+                    Create a New Post
+                </h1>
+
+                <p>
+                    Write something meaningful and share
+                    your ideas with the BlogSphere community.
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 POST FORM
+            ========================== -->
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                class="create-form"
+            >
+
+                <!-- TITLE -->
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Post Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="Give your story a title"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- STORY -->
+
+                <div class="form-group">
+
+                    <label for="content">
+                        Your Story
+                    </label>
+
+                    <textarea
+                        id="content"
+                        name="content"
+                        placeholder="Write your story here..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- IMAGE -->
+
+                <div class="form-group">
+
+                    <label for="image">
+                        Post Image
+                    </label>
+
+                    <div class="image-upload-box">
+
+                        <input
+                            type="file"
+                            id="image"
+                            name="image"
+                            accept=".jpg,.jpeg,.png,.webp"
+                        >
+
+                        <p>
+                            Upload a JPG, PNG or WEBP image.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="publish-button"
+                >
+                    Publish Post
+                </button>
+
+            </form>
+
+
+            <!-- BACK -->
+
+            <div class="back-link">
+
+                <a href="{{ url_for('home') }}">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        © 2026 BlogSphere. Share your thoughts.
+
+    </footer>
+
+</body>
+
+</html>
