@@ -2094,3 +2094,168 @@ main {
         width: 100%;
     }
 }
+
+/* =========================
+   EDIT POST PAGE
+========================= */
+
+.edit-post-page {
+    min-height: calc(100vh - 150px);
+    background: var(--cream);
+    padding: 70px 20px 80px;
+}
+
+.edit-post-container {
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+.edit-post-heading {
+    text-align: center;
+    margin-bottom: 38px;
+}
+
+.edit-post-tagline {
+    color: var(--lavender-dark);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+.edit-post-heading h1 {
+    color: var(--text-dark);
+    font-size: 38px;
+    margin: 0 0 12px;
+}
+
+.edit-post-heading p:last-child {
+    color: var(--text);
+    font-size: 15px;
+    margin: 0;
+}
+
+
+/* =========================
+   EDIT FORM CARD
+========================= */
+
+.edit-post-form {
+    background: var(--cream-light);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 38px;
+    box-shadow: var(--shadow);
+}
+
+.edit-post-form .form-group {
+    margin-bottom: 25px;
+}
+
+.edit-post-form label {
+    display: block;
+    color: var(--text-dark);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 9px;
+}
+
+.edit-post-form input,
+.edit-post-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background: #fffdf9;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    color: var(--text-dark);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.edit-post-form input {
+    height: 48px;
+    padding: 0 15px;
+}
+
+.edit-post-form textarea {
+    min-height: 240px;
+    padding: 14px 15px;
+    line-height: 1.7;
+    resize: vertical;
+}
+
+.edit-post-form input:focus,
+.edit-post-form textarea:focus {
+    border-color: var(--lavender);
+    box-shadow: 0 0 0 3px rgba(143, 122, 168, 0.12);
+    background: #fffaf4;
+}
+
+
+/* =========================
+   UPDATE BUTTON
+========================= */
+
+.edit-submit-button {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 11px;
+    background: var(--lavender);
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.edit-submit-button:hover {
+    background: var(--lavender-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(111, 93, 134, 0.20);
+}
+
+
+/* =========================
+   BACK LINK
+========================= */
+
+.edit-back-link {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.edit-back-link a {
+    color: var(--lavender-dark);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.edit-back-link a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .edit-post-page {
+        padding: 45px 15px 60px;
+    }
+
+    .edit-post-heading h1 {
+        font-size: 30px;
+    }
+
+    .edit-post-form {
+        padding: 24px;
+    }
+
+}

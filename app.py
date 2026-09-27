@@ -38,16 +38,29 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def get_db_connection():
 
+    print("DB HOST:", os.environ.get("DB_HOST"))
+    print("DB PORT:", os.environ.get("DB_PORT"))
+    print("DB USER:", os.environ.get("DB_USER"))
+    print("DB NAME:", os.environ.get("DB_NAME"))
+    
     connection = pymysql.connect(
-        host="localhost",
-        user="root",
-        password="Vedha@232115",
-        database="blog_platform",
-        cursorclass=pymysql.cursors.DictCursor
+        host=os.environ.get("DB_HOST"),
+        port=int(os.environ.get("DB_PORT", 4000)),
+        user=os.environ.get("DB_USER"),
+        password=os.environ.get("DB_PASSWORD"),
+        database=os.environ.get("DB_NAME", "blog_platform"),
+        cursorclass=pymysql.cursors.DictCursor,
+
+        ssl_ca=os.path.join(
+            os.path.dirname(__file__),
+            "ca.pem"
+        ),
+
+        ssl_verify_cert=True,
+        ssl_verify_identity=True
     )
 
     return connection
-
 
 # =========================
 # CHECK IMAGE EXTENSION
